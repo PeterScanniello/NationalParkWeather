@@ -1,0 +1,24 @@
+﻿@model Park
+@{
+    ViewData["Title"] = "Details";
+}
+
+<section class="centeredPanel">
+
+    <div class="park-details">
+
+        <img src="~/images/img/parks/@(Model.ParkCode).jpg" />
+
+
+        <h2>@Model.ParkName</h2>
+        <p>Park Code: @Model.ParkCode</p>
+
+        <h3>Park State: @Model.State</h3>
+        <p>@Model.ParkDescription</p>
+    </div>
+    <a asp-controller="Home" asp-action="Forecast" asp-route-id="@Model.ParkCode">
+        <input type="submit" value="5-Day Forecast" />
+    </a>
+    
+</section>
+

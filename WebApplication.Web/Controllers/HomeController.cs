@@ -22,7 +22,14 @@ namespace WebApplication.Web.Controllers
         {
             IList<Park> parks = parkDAO.GetParks();
             return View(parks);
-        }       
+        }
+
+        public IActionResult Details(string parkCode)
+        {
+            
+            Park park = parkDAO.GetPark(parkCode);
+            return View(park);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

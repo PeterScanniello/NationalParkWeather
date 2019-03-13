@@ -16,8 +16,18 @@ namespace WebApplication.Web.DAL
         }
         public Park GetPark(string code)
         {
-            return GetParks().FirstOrDefault(p => p.ParkCode == code );
+            Park newPark = new Park();
+            IList<Park> parks = GetParks();
+            foreach (Park park in parks)
+            {
+                if(newPark.ParkCode == code)
+                {
+                    newPark = park;
+                }
+            }
+            return newPark;   
         }
+            
 
         public IList<Park> GetParks()
         {
