@@ -40,13 +40,13 @@ namespace WebApplication.Web.DAL
             return forecasts;
         }
 
-        public IList<Forecast> GetForecastsByPark(string code)
+        public IList<Forecast> GetForecastsByPark(string id)
         {
             IList<Forecast> theOnesWeWant = new List<Forecast>();
             IList<Forecast> forecasts = GetAllForecasts();
             foreach(Forecast forecast in forecasts)
             {
-                if(forecast.ParkCode==code)
+                if(forecast.ParkCode==id)
                 {
                     theOnesWeWant.Add(forecast);
                 }

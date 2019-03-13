@@ -25,15 +25,15 @@ namespace WebApplication.Web.Controllers
             return View(parks);
         }
 
-        public IActionResult Details(string parkCode)
+        public IActionResult Details(string id)
         {            
-            Park park = parkDAO.GetPark(parkCode);
+            Park park = parkDAO.GetPark(id);
             return View(park);
         }
 
-        public IActionResult Forecast(string parkCode)
+        public IActionResult Forecast(string id)
         {
-            IList<Forecast> forecasts = forecastDAO.GetAllForecasts();     
+            IList<Forecast> forecasts = forecastDAO.GetForecastsByPark(id);
 
             return View(forecasts);
         }

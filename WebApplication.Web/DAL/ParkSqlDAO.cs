@@ -14,13 +14,13 @@ namespace WebApplication.Web.DAL
         {
             this.connectionString = connectionString;
         }
-        public Park GetPark(string code)
+        public Park GetPark(string id)
         {
             Park newPark = new Park();
             IList<Park> parks = GetParks();
             foreach (Park park in parks)
             {
-                if(newPark.ParkCode == code)
+                if(park.ParkCode == id)
                 {
                     newPark = park;
                 }
