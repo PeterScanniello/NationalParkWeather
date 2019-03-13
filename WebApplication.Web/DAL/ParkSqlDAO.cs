@@ -14,14 +14,9 @@ namespace WebApplication.Web.DAL
         {
             this.connectionString = connectionString;
         }
-        public Park GetPark(int id)
+        public Park GetPark(string code)
         {
-            Park park = new Park();
-
-
-
-
-
+            return GetParks().FirstOrDefault(p => p.ParkCode == code );
         }
 
         public IList<Park> GetParks()
@@ -54,6 +49,7 @@ namespace WebApplication.Web.DAL
         {
             Park park = new Park();
 
+           // park.ParkId = Convert.ToInt32(reader["Id"]);
             park.ParkCode = Convert.ToString(reader["ParkCode"]);
             park.ParkName = Convert.ToString(reader["ParkName"]);
             park.State = Convert.ToString(reader["State"]);

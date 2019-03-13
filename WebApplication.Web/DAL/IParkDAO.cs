@@ -6,9 +6,9 @@ using WebApplication.Web.Models;
 
 namespace WebApplication.Web.DAL
 {
-    interface IParkDAO
+    public interface IParkDAO
     {
-        Park GetPark(int id);
+        Park GetPark(string code);
 
         IList<Park> GetParks();
     }

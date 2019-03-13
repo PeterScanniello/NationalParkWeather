@@ -1,6 +1,19 @@
-﻿@model Park
+﻿@model IList<Park>
+
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<h2>Index</h2>
+@foreach (Park park in Model)
+{
+    <div class="park">
+        <a asp-controller="Home" asp-action="Details" asp-route-id="@park.ParkCode">
+            <img src="~/images/img/parks/@(park.ParkCode).jpg" />
+        </a>
+        <a asp-controller="Home" asp-action="Details" asp-route-id="@park.ParkCode">
+            <h2>@park.ParkName</h2>
+        </a>
+        <h3>@park.State</h3>
+        <p>@park.ParkDescription</p>
+    </div>
+}

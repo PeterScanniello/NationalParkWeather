@@ -7,7 +7,7 @@ namespace WebApplication.Web.Models
 {
     public class Park
     {
-       // public int Id { get; set; }
+       // public int ParkId { get; set; }
 
         public string ParkCode { get; set; }
 
