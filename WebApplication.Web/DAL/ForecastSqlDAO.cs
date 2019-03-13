@@ -15,7 +15,7 @@ namespace WebApplication.Web.DAL
             this.connectionString = connectionString;
         }
 
-        public IList<Forecast> GetAllForecastsByPark(string parkCode)
+        public IList<Forecast> GetAllForecasts()
         {
             IList<Forecast> forecasts = new List<Forecast>();
             try
@@ -23,24 +23,71 @@ namespace WebApplication.Web.DAL
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM weather WHERE weather.parkCode = @parkCode", conn);
-                    cmd.Parameters.AddWithValue("@parkCode", parkCode);
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM weather", conn);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
                         Forecast forecast = ConvertReaderToForecast(reader);
                         forecasts.Add(forecast);
-
                     }
                 }
             }
             catch (SqlException ex)
             {
-
                 throw;
             }
             return forecasts;
+        }
+
+        public IList<Forecast> GetForecastsByPark(string code)
+        {
+            IList<Forecast> theOnesWeWant = new List<Forecast>();
+            IList<Forecast> forecasts = GetAllForecasts();
+            foreach(Forecast forecast in forecasts)
+            {
+                if(forecast.ParkCode==code)
+                {
+                    theOnesWeWant.Add(forecast);
+                }
+            }
+            return theOnesWeWant;
+        }
+
+        public Dictionary<string, string> Advice = new Dictionary<string, string>()
+            {
+                { "snow", "Pack snowshoes" },
+                {"rain", "Pack rain gear and wear waterproof shoes" },
+                {"thunderstorms", "Seek shelter and avoid hiking on exposed ridges" },
+                {"sunny", "Pack sunblock" },
+            };
+
+
+        public List<string> GetAdvice(Forecast newForecast)
+        {
+            List<string> advice = new List<string>();
+            foreach (KeyValuePair<string, string> kvp in Advice)
+            {
+                if (kvp.Key == newForecast.Weather)
+                {
+                    advice.Add(kvp.Value);
+                }
+            }
+
+            if(newForecast.High>75)
+            {
+                advice.Add("Bring an extra gallon of water");
+            }
+            if((newForecast.High-newForecast.Low)>20)
+            {
+                advice.Add("Wear breathable layers");
+            }
+            if(newForecast.Low<20)
+            {
+                advice.Add("Be aware, exposure to frigid temperatures can have a negative impact on your health and happiness, up to and including death.");
+            }
+
+            return advice;
         }
 
         private Forecast ConvertReaderToForecast(SqlDataReader reader)
@@ -52,9 +99,10 @@ namespace WebApplication.Web.DAL
             forecast.Low = Convert.ToInt32(reader["low"]);
             forecast.High = Convert.ToInt32(reader["high"]);
             forecast.Weather = Convert.ToString(reader["forecast"]);
+            forecast.Advice = GetAdvice(forecast);
 
             return forecast;
         }
     }
-    }
 }
+

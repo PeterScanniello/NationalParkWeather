@@ -8,8 +8,8 @@ namespace WebApplication.Web.DAL
 {
     public interface IForecastDAO
     {
-        IList<Forecast> GetAllForecastsByPark(string parkCode);
-
+        IList<Forecast> GetForecastsByPark(string parkCode);
+        IList<Forecast> GetAllForecasts();
     }
 }
         

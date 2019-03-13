@@ -1,0 +1,29 @@
+﻿@model IList<Forecast>
+@{
+    ViewData["Title"] = "Forecast";
+}
+
+@foreach(Forecast forecast in Model)
+{
+        <div class="forecast">
+
+            <h1>Day @forecast.Day</h1>
+         @if (forecast.Weather != "cloudy")
+         {
+                 <img src="~/images/img/weather/@(forecast.Weather).png" />
+         }
+
+
+     <h4>High Temp: @forecast.High</h4>
+     <h4>High Temp: @forecast.Low</h4>
+
+      <ul>
+      @foreach(string advice in forecast.Advice)
+      {
+            <li>@advice.ToString()</li>
+      }
+        </ul>
+
+    </div>
+}
+

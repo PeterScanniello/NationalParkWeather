@@ -12,16 +12,10 @@ namespace WebApplication.Web.Controllers
     public class HomeController : Controller
     {
         private IParkDAO parkDAO;
-
-        public HomeController(IParkDAO parkDAO)
+        private IForecastDAO forecastDAO;
+        public HomeController(IParkDAO parkDAO, IForecastDAO forecastDAO)
         {
             this.parkDAO = parkDAO;
-        }
-
-        private IForecastDAO forecastDAO;
-
-        public HomeController(IForecastDAO forecastDAO)
-        {
             this.forecastDAO = forecastDAO;
         }
 
@@ -32,19 +26,17 @@ namespace WebApplication.Web.Controllers
         }
 
         public IActionResult Details(string parkCode)
-        {
-            
+        {            
             Park park = parkDAO.GetPark(parkCode);
             return View(park);
         }
 
         public IActionResult Forecast(string parkCode)
         {
-            IList<Forecast> forecasts = forecastDAO.GetAllForecastsByPark(parkCode);            
+            IList<Forecast> forecasts = forecastDAO.GetAllForecasts();     
+
             return View(forecasts);
         }
-
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

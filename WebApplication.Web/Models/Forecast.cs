@@ -17,5 +17,7 @@ namespace WebApplication.Web.Models
 
         public string Weather { get; set; }
 
+        public IList<string> Advice { get; set; }
+
     }
 }
