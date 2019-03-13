@@ -18,6 +18,13 @@ namespace WebApplication.Web.Controllers
             this.parkDAO = parkDAO;
         }
 
+        private IForecastDAO forecastDAO;
+
+        public HomeController(IForecastDAO forecastDAO)
+        {
+            this.forecastDAO = forecastDAO;
+        }
+
         public IActionResult Index()
         {
             IList<Park> parks = parkDAO.GetParks();
@@ -30,6 +37,14 @@ namespace WebApplication.Web.Controllers
             Park park = parkDAO.GetPark(parkCode);
             return View(park);
         }
+
+        public IActionResult Forecast(string parkCode)
+        {
+            IList<Forecast> forecasts = forecastDAO.GetAllForecastsByPark(parkCode);            
+            return View(forecasts);
+        }
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

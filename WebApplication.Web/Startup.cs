@@ -52,7 +52,7 @@ namespace WebApplication.Web
             // For access to a dao
             services.AddTransient<IUserDAO>(m => new UserSqlDAO(Configuration.GetConnectionString("NPGeek")));
             services.AddTransient<IParkDAO>(q => new ParkSqlDAO(Configuration.GetConnectionString("NPGeek")));
-
+            services.AddTransient<IForecastDAO>(u => new ForecastSqlDAO(Configuration.GetConnectionString("NPGeek")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
