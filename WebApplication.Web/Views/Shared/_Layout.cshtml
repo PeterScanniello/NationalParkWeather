@@ -7,7 +7,14 @@
     <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
-    <h1>Welcome!</h1>
+    <nav>
+        <ul>
+            <li>
+                <a asp-action="Index" asp-controller="Home">Home</a>
+                <a asp-action="AddSurvey" asp-controller="Survey">Survey</a>
+            </li>
+        </ul>
+    </nav>
 
     @RenderBody()
 
