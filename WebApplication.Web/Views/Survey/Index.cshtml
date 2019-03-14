@@ -8,14 +8,15 @@
 
 @foreach (Park park in Model)
 {
-    <img srs="~/images/img/parks/@(park.ParkCode).jpg" />
+    @if (park.Surveys.Count > 0)
+    {
+        <img src="~/images/img/parks/@(park.ParkCode).jpg" />
 
-    <h2> @park.ParkName </h2>
+        <h2> @park.ParkName </h2>
+
+        <h4>@park.Surveys.Count</h4>
+    }
+
 
 }
-
-
-
-
-
 

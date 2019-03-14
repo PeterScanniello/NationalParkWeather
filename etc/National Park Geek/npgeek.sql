@@ -152,3 +152,9 @@ select * from survey_result
 
 select * from weather where weather.parkCode='CVNP'
 
+INSERT INTO survey_result Values ('CVNP', 'joe@fakeemail.com', 'Ohio', 'inactive')
+INSERT INTO survey_result Values ('CVNP', 'joe@fakeemail2.com', 'Ohio', 'inactive')
+INSERT INTO survey_result Values ('YNP', 'joe@fakeemail.com', 'Ohio', 'inactive')
+
+SELECT * FROM survey_result order by parkCode
+

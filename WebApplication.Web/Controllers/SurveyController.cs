@@ -23,9 +23,18 @@ namespace WebApplication.Web.Controllers
         public IActionResult Index()
         {
             IList<Park> parks = parkDao.GetParks();
-            return View(parks);
+            foreach (Park park in parks)
+            {
+                IList<Survey> surveys = surveyDao.GetSurveys(park.ParkCode);
+                park.Surveys = surveys;
+            }
+
+           var orderList=parks.OrderBy(s => s.Surveys.Count).ToList();
+            orderList.Reverse();
+            
+            return View(orderList);
         }
-        
+
 
 
         [HttpGet]
@@ -106,9 +115,8 @@ namespace WebApplication.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-            surveyDao.SaveNewSurvey(model);
-            return RedirectToAction("Index");
-
+                surveyDao.SaveNewSurvey(model);
+                return RedirectToAction("Index");
             }
             return View("NewSurvey");
         }

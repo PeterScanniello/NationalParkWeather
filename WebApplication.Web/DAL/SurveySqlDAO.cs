@@ -14,7 +14,7 @@ namespace WebApplication.Web.Models
             this.connectionString = connectionString;
         }
 
-        public IList<Survey> GetSurveys()
+        public IList<Survey> GetSurveys(string parkCode)
         {
             IList<Survey> surveys = new List<Survey>();
 
@@ -23,7 +23,8 @@ namespace WebApplication.Web.Models
                 using(SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM survey_result", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM survey_result where @parkcode=parkCode order by parkCode", conn);
+                    cmd.Parameters.AddWithValue("@parkCode", parkCode);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())

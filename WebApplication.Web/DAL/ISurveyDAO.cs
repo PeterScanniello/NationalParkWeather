@@ -7,7 +7,7 @@ namespace WebApplication.Web.Models
 {
     public interface ISurveyDAO
     {
-        IList<Survey> GetSurveys();
+        IList<Survey> GetSurveys(string parkCode);
         void SaveNewSurvey(Survey survey);
     }
 }
