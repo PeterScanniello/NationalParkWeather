@@ -1,0 +1,47 @@
+﻿@model Survey
+@{
+    ViewData["Title"] = "NewSurvey";
+    List<Park> parks = (List<Park>)ViewData["parks"];
+    List<string> states = (List<string>)ViewData["States"];
+    List<string> activityLevels = (List<string>)ViewData["ActivityLevels"];
+
+}
+
+<form method="post" asp-controller="survey" asp-action="newsurvey">
+
+    <div class="survey-field">
+        <div>
+            <select>
+                @foreach (Park park in parks)
+                {
+                    <option value="@park.ParkCode">@park.ParkName</option>
+                }
+            </select>
+        </div>
+
+        <div>
+            <label asp-for="EmailAddress"></label>
+            <input asp-for="EmailAddress" type="text" />
+            <span asp-validation-for="EmailAddress"></span>
+        </div>
+
+        <div>
+            <select>
+                @foreach (string state in states)
+                {
+                    <option value="@state">@state</option>
+                }
+            </select>
+        </div>
+        <div>
+            <select>
+                @foreach (string level in activityLevels)
+                {
+                    <option value="@level">@level</option>
+                }
+            </select>
+        </div>
+    </div>
+    <input type="submit" value="Submit" />
+</form>
+

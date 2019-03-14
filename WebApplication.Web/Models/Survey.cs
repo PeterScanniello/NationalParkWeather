@@ -8,7 +8,7 @@ namespace WebApplication.Web.Models
 {
     public class Survey
     {
-        [Required]
+
         public int SurveyId { get; set; }
 
         [Required]
@@ -28,5 +28,6 @@ namespace WebApplication.Web.Models
         [Required]
         [MaxLength(100)]
         public string ActivityLevel { get; set; }
+
     }
 }

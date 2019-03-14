@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebApplication.Web.DAL;
+using WebApplication.Web.Models;
 using WebApplication.Web.Providers.Auth;
 
 namespace WebApplication.Web
@@ -53,6 +54,7 @@ namespace WebApplication.Web
             services.AddTransient<IUserDAO>(m => new UserSqlDAO(Configuration.GetConnectionString("NPGeek")));
             services.AddTransient<IParkDAO>(q => new ParkSqlDAO(Configuration.GetConnectionString("NPGeek")));
             services.AddTransient<IForecastDAO>(u => new ForecastSqlDAO(Configuration.GetConnectionString("NPGeek")));
+            services.AddTransient<ISurveyDAO>(p => new SurveySqlDAO(Configuration.GetConnectionString("NPGeek")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

@@ -144,3 +144,11 @@ INSERT INTO weather VALUES ('RMNP',4,33,47,'partly cloudy');
 INSERT INTO weather VALUES ('RMNP',5,30,43,'rain');
 
 COMMIT;
+
+select * from park
+select * from users
+select * from weather
+select * from survey_result
+
+select * from weather where weather.parkCode='CVNP'
+
