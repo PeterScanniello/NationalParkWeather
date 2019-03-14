@@ -6,7 +6,7 @@ using System.Text;
 namespace WebApplication.Tests.DAL
 {
     [TestClass]
-    public class UserSqlDAOTests
+    public class UserSqlDAOTests:NPGeekDAOTests
     {
 
     }
