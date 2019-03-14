@@ -38,11 +38,19 @@ namespace WebApplication.Web.Models
 
                 throw;
             }
+            return surveys;
         }
+        
 
         private Survey ConvertReaderToSurvey(SqlDataReader reader)
         {
-            throw new NotImplementedException();
+            Survey survey = new Survey();
+            survey.ParkCode = Convert.ToString(reader["UserName"]);
+            survey.EmailAddress = Convert.ToString(reader["EmailAddress"]);
+            survey.State = Convert.ToString(reader["State"]);
+            survey.ActivityLevel = Convert.ToString(reader["ActivityLevel"]);
+
+            return survey;
         }
 
         public void SaveNewSurvey(Survey survey)
@@ -53,8 +61,13 @@ namespace WebApplication.Web.Models
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("INSERT INTO survey_result ( Values ( )
+                    SqlCommand cmd = new SqlCommand("INSERT INTO survey_result Values (@ParkCode, @EmailAddres, @State, @ActivityLevel", conn);
+                    cmd.Parameters.AddWithValue("@ParkCode", survey.ParkCode);
+                    cmd.Parameters.AddWithValue("@EmailAddress", survey.EmailAddress);
+                    cmd.Parameters.AddWithValue("@State", survey.State);
+                    cmd.Parameters.AddWithValue("@ActivityLevel", survey.ActivityLevel);
 
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (SqlException ex)

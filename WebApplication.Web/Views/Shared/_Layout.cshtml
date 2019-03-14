@@ -7,12 +7,13 @@
     <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
+    <header>
+        <img src="~/images/img/logo.png" alt="National Park Geek logo" />
+    </header>
     <nav>
-        <ul>
-            <li>
-                <a asp-action="Index" asp-controller="Home">Home</a>
-                <a asp-action="AddSurvey" asp-controller="Survey">Survey</a>
-            </li>
+        <ul class="Nav-List">
+            <li><a asp-action="Index" asp-controller="Home">Home</a></li>
+            <li> <a asp-action="AddSurvey" asp-controller="Survey">Survey</a> </li>
         </ul>
     </nav>
 

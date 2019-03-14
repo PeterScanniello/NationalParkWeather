@@ -14,7 +14,7 @@ namespace WebApplication.Web.Models
         [Required]
         [MinLength(3)]
         [MaxLength(10)]
-        public string parkCode { get; set; }
+        public string ParkCode { get; set; }
 
         [Required]
         [EmailAddress]
