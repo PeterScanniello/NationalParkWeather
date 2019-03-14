@@ -59,5 +59,7 @@ namespace WebApplication.Web.Models
 
         [Required]
         public int NumberOfAnimalSpecies { get; set; }
+
+        public IList<Survey> Surveys { get; set; }
     }
 }

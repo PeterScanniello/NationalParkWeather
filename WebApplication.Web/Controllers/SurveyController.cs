@@ -20,13 +20,12 @@ namespace WebApplication.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(Survey model)
+        public IActionResult Index()
         {
-            IList<Survey> surveys = surveyDao.GetSurveys();
-            model.Surveys = surveys;
-            return View(model);
+            IList<Park> parks = parkDao.GetParks();
+            return View(parks);
         }
-
+        
 
 
         [HttpGet]
@@ -105,8 +104,13 @@ namespace WebApplication.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult NewSurvey(Survey model)
         {
+            if (ModelState.IsValid)
+            {
             surveyDao.SaveNewSurvey(model);
             return RedirectToAction("Index");
+
+            }
+            return View("NewSurvey");
         }
     }
 }

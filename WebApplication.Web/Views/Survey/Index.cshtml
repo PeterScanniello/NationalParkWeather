@@ -1,25 +1,21 @@
-﻿@model IList<Survey>
+﻿@model IList<Park>
 @{
     ViewData["Title"] = "Index";
-    List<Park> parks = (List<Park>)ViewData["parks"];
+
 }
 
 <h2>Index</h2>
 
-@foreach (Survey survey in Model)
+@foreach (Park park in Model)
 {
+    <img srs="~/images/img/parks/@(park.ParkCode).jpg" />
 
-    @foreach (Park park in parks)
-    {
-        <article class="SurveyPost"></article>
-        @if (survey.ParkCode == park.ParkCode)
-        {
-            <img srs="~/images/img/parks/@(park.ParkCode).jpg" />
-            <h2>@park.ParkName</h2>
-        }
-    }
+    <h2> @park.ParkName </h2>
 
 }
+
+
+
 
 
 
