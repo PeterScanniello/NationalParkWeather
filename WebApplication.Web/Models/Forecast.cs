@@ -25,7 +25,7 @@ namespace WebApplication.Web.Models
         [Required]
         [MaxLength(100)]
         public string Weather { get; set; }
-
+        
         public IList<string> Advice { get; set; }
         
 

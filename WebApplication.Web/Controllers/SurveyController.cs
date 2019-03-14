@@ -29,9 +29,9 @@ namespace WebApplication.Web.Controllers
                 park.Surveys = surveys;
             }
 
-           var orderList=parks.OrderBy(s => s.Surveys.Count).ToList();
+            var orderList = parks.OrderBy(s => s.Surveys.Count).ToList();
             orderList.Reverse();
-            
+
             return View(orderList);
         }
 
@@ -120,5 +120,6 @@ namespace WebApplication.Web.Controllers
             }
             return View("NewSurvey");
         }
+
     }
 }
