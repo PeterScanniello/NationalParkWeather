@@ -1,29 +1,45 @@
 ﻿@model IList<Forecast>
 @{
     ViewData["Title"] = "Forecast";
+    string pref = (string)ViewData["TempPref"];
 }
+<form method="get" asp-controller="Home" asp-action="Forecast">
+    <input type="submit" value="ChangeTemperatureType" />    
+    <select asp-for="@pref">
+        <option value="C">Celsius</option>
+        <option value="F">Fahrenheit</option>
+    </select>
+</form> 
 
-@foreach(Forecast forecast in Model)
+@foreach (Forecast forecast in Model)
 {
-        <div class="forecast">
+<div class="forecast">
 
-            <h1>Day @forecast.Day</h1>
-         @if (forecast.Weather != "cloudy")
-         {
-                 <img src="~/images/img/weather/@(forecast.Weather).png" />
-         }
+    <h1>Day @forecast.Day</h1>
+    @if (forecast.Weather != "cloudy")
+    {
+        <img src="~/images/img/weather/@(forecast.Weather).png" />
+    }
 
+    @if (pref == "F")
+    {
+        <h4>High Temp: @forecast.High Degrees Fahrenheit</h4>
+        <h4>High Temp: @forecast.Low Degrees Fahrenheit</h4>
+    }
 
-     <h4>High Temp: @forecast.High</h4>
-     <h4>High Temp: @forecast.Low</h4>
+    @if(pref!="F")
+    {
+        <h4>High Temp: @(((forecast.High-32)*5)/9) Degrees Celsius</h4>
+        <h4>High Temp: @(((forecast.Low-32)*5)/9) Degrees Celsius</h4>
+    }
 
-      <ul>
-      @foreach(string advice in forecast.Advice)
-      {
+    <ul>
+        @foreach (string advice in forecast.Advice)
+        {
             <li>@advice.ToString()</li>
-      }
-        </ul>
+        }
+    </ul>
 
-    </div>
+</div>
 }
 

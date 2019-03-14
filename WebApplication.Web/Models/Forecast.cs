@@ -11,7 +11,7 @@ namespace WebApplication.Web.Models
         [Required]
         [MinLength(3)]
         [MaxLength(10)]
-        public string ParkCode {get; set;}
+        public string ParkCode { get; set; }
 
         [Required]
         public int Day { get; set; }
@@ -25,9 +25,9 @@ namespace WebApplication.Web.Models
         [Required]
         [MaxLength(100)]
         public string Weather { get; set; }
-        
-        public IList<string> Advice { get; set; }
-        
 
+        public IList<string> Advice { get; set; }
+
+        public string TempPreference { get; set; }
     }
 }

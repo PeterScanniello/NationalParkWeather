@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Web.DAL;
+using WebApplication.Web.Extensions;
 using WebApplication.Web.Models;
 
 namespace WebApplication.Web.Controllers
@@ -27,42 +28,35 @@ namespace WebApplication.Web.Controllers
         }
 
         public IActionResult Details(string id)
-        {            
+        {
             Park park = parkDAO.GetPark(id);
             return View(park);
         }
 
-        public IActionResult Forecast(string id)
+        public IActionResult Forecast(string id,string pref)
         {
+            if(pref == null)
+            {
+                pref = HttpContext.Session.GetString("TempPref");
+                {
+                    if (pref == null)
+                    {
+                        pref = "F";
+                    }
+                }
+            }
+            else
+            {
+                HttpContext.Session.SetString("TempPref", pref);
+            }
+
+            ViewData["TempPref"] = pref;
             IList<Forecast> forecasts = forecastDAO.GetForecastsByPark(id);
 
             return View(forecasts);
         }
 
-        private Temperature ChangeTemp()
-        {
-            Temperature temp = null;
-
-            if (HttpContext.Session.Get<Temperature>("TempPreference") != null)
-            {
-                temp = HttpContext.Session.Get<Temperature>("TempPreference");
-            }
-            else
-            {
-                temp = new Temperature();
-                ChangeTempPreference(temp);
-            }
-            return temp;
-        }
-        
-
-        private void ChangeTempPreference(Temperature temp)
-        {
-            HttpContext.Session.Set("TempPreference", temp);
-        }
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
