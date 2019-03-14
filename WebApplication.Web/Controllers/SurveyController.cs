@@ -20,11 +20,14 @@ namespace WebApplication.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(Survey model)
         {
             IList<Survey> surveys = surveyDao.GetSurveys();
-            return View(surveys);
+            model.Surveys = surveys;
+            return View(model);
         }
+
+
 
         [HttpGet]
         public IActionResult NewSurvey()

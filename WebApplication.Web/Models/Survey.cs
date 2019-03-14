@@ -29,5 +29,6 @@ namespace WebApplication.Web.Models
         [MaxLength(100)]
         public string ActivityLevel { get; set; }
 
+        public IList<Survey> Surveys { get; set; }
     }
 }

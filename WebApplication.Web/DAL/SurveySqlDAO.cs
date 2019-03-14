@@ -45,7 +45,7 @@ namespace WebApplication.Web.Models
         private Survey ConvertReaderToSurvey(SqlDataReader reader)
         {
             Survey survey = new Survey();
-            survey.ParkCode = Convert.ToString(reader["UserName"]);
+            survey.ParkCode = Convert.ToString(reader["ParkCode"]);
             survey.EmailAddress = Convert.ToString(reader["EmailAddress"]);
             survey.State = Convert.ToString(reader["State"]);
             survey.ActivityLevel = Convert.ToString(reader["ActivityLevel"]);
@@ -61,7 +61,7 @@ namespace WebApplication.Web.Models
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("INSERT INTO survey_result Values (@ParkCode, @EmailAddres, @State, @ActivityLevel", conn);
+                    SqlCommand cmd = new SqlCommand("INSERT INTO survey_result Values (@ParkCode, @EmailAddress, @State, @ActivityLevel);", conn);
                     cmd.Parameters.AddWithValue("@ParkCode", survey.ParkCode);
                     cmd.Parameters.AddWithValue("@EmailAddress", survey.EmailAddress);
                     cmd.Parameters.AddWithValue("@State", survey.State);
