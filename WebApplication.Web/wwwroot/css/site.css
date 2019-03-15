@@ -1,1 +1,60 @@
-﻿
+﻿body {
+}
+
+header {
+    background-color: rgb(169, 241, 209);
+}
+
+    header img {
+        width: 35%;
+    }
+
+nav {
+    background-color: rgb(84, 186, 141);
+}
+
+    nav li {
+        font-size: 25px;
+        display: inline-block;
+        text-decoration: none;
+        list-style-type: none;
+    }
+
+ul.Nav-List {
+    margin-top: 0px;
+    display: flex;
+    align-items: center;
+}
+
+nav button.nav-button {
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+main img{
+    width: 100%;
+}
+
+main .park{
+    display:grid;
+    grid-template-columns: 1fr 4fr 4fr 1fr;
+    grid-gap:15px;
+    grid-template-areas:
+    ". parkimage description .";
+        
+    padding-top: 15px;
+}
+
+main.park .park-image{
+    grid-area: parkimage;
+}
+
+main.park .name-description {
+    grid-area: description;
+}
+
+
+
+
+
+

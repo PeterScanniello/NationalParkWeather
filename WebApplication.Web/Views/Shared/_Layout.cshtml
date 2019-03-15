@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WebApplication.Web</title>
     <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/Details.css" rel="stylesheet" />
+    <link href="~/css/Survey.css" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -12,8 +14,16 @@
     </header>
     <nav>
         <ul class="Nav-List">
-            <li><a asp-action="Index" asp-controller="Home">Home</a></li>
-            <li> <a asp-action="NewSurvey" asp-controller="Survey">Survey</a> </li>
+            <li>
+                <form method="get" asp-action="Index" asp-controller="Home">
+                    <button class ="nav-button"type="submit">Home</button>
+                </form>
+            </li>
+            <li>
+                <form method="get" asp-action="NewSurvey" asp-controller="Survey">
+                    <button class="nav-button" type="submit">Survey</button>
+                </form>
+            </li>
         </ul>
     </nav>
 

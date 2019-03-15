@@ -34,12 +34,12 @@
             </select>
         </div>
         <div>
-            <select asp-for="ActivityLevel">
+            
                 @foreach (string level in activityLevels)
                 {
-                    <option value="@level">@level</option>
+                    <input type="radio" name="@level" value="@level" />@level<br>
                 }
-            </select>
+            
         </div>
     </div>
     <input type="submit" value="Submit" />
