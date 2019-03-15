@@ -33,9 +33,7 @@ namespace WebApplication.Tests.DAL
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 SqlDataReader reader = cmd.ExecuteReader();
-
             }
-
         }
 
         [TestCleanup]
