@@ -11,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebApplication.Web.DAL;
 using WebApplication.Web.Models;
-using WebApplication.Web.Providers.Auth;
 
 namespace WebApplication.Web
 {
@@ -48,10 +47,7 @@ namespace WebApplication.Web
             // For Authentication to work
             // For access to session outside of controller
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            // For access to an authentication provider
-            services.AddScoped<IAuthProvider, SessionAuthProvider>();
             // For access to a dao
-            services.AddTransient<IUserDAO>(m => new UserSqlDAO(Configuration.GetConnectionString("NPGeek")));
             services.AddTransient<IParkDAO>(q => new ParkSqlDAO(Configuration.GetConnectionString("NPGeek")));
             services.AddTransient<IForecastDAO>(u => new ForecastSqlDAO(Configuration.GetConnectionString("NPGeek")));
             services.AddTransient<ISurveyDAO>(p => new SurveySqlDAO(Configuration.GetConnectionString("NPGeek")));

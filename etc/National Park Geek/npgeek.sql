@@ -164,5 +164,4 @@ INSERT INTO survey_result Values ('YNP', 'joe@fakeemail.com', 'Ohio', 'inactive'
 INSERT INTO survey_result Values ('YNP', 'joe@fakeemail.com', 'Ohio', 'inactive')
 INSERT INTO survey_result Values ('YNP', 'joe@fakeemail.com', 'Ohio', 'inactive')
 
-SELECT * FROM survey_result order by parkCode
-
+select * from survey_result

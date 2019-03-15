@@ -6,15 +6,16 @@
 
 
 <section class="centeredPanel">
+
+
     <div class="detail-image">
         <img class="detail-image" src="~/images/img/parks/@(Model.Park.ParkCode).jpg" />
     </div>
 
     <div class="park-details">
-
         <h2>@Model.Park.ParkName</h2>
-        <p>Park Code: @Model.Park.ParkCode</p>
         <ul class="park-detail-info">
+            <li>Park Code: @Model.Park.ParkCode</li>
             <li>State: @Model.Park.State</li>
             <li>Year Founded: @Model.Park.YearFounded</li>
             <li>Annual Visitors: @Model.Park.AnnualVisitorCount</li>
@@ -23,58 +24,58 @@
             <li>Elevation(ft): @Model.Park.ElevationInFeet</li>
             <li>Entry Fee: @Model.Park.EntryFee</li>
             <li>Trail Miles: @Model.Park.MilesOfTrail</li>
-            <li>Animal Species@Model.Park.NumberOfAnimalSpecies</li>
+            <li>Animal Species: @Model.Park.NumberOfAnimalSpecies</li>
             <li>Number of campsites: @Model.Park.NumberOfCampsites</li>
         </ul>
-        <div class="words">
-            <p>@Model.Park.ParkDescription</p>
-            <p>@Model.Park.InspirationalQuote</p>
-            <h5>@Model.Park.InspirationalQuoteSource</h5>
-        </div>
     </div>
 
-    <form method="get" asp-controller="Home" asp-action="Details">
-        <input type="submit" value="ChangeTemperatureType" />
-        <select asp-for="@pref">
-            <option value="C">Celsius</option>
-            <option value="F">Fahrenheit</option>
-        </select>
-    </form>
 
-    <div class="forecast">
-        @foreach (Forecast forecast in Model.Forecasts)
-        {
-            <div class="forecast-info">
-
-                <h1>Day @forecast.Day</h1>
-                @if (forecast.Weather != "cloudy")
-                {
-                    <img class="weather-img" src="~/images/img/weather/@(forecast.Weather).png" />
-                }
-
-                @if (pref != "C")
-                {
-                    <h4>High Temp: @forecast.High Degrees Fahrenheit</h4>
-                    <h4>High Temp: @forecast.Low Degrees Fahrenheit</h4>
-                }
-
-                @if (pref == "C")
-                {
-                    <h4>High Temp: @(((forecast.High - 32) * 5) / 9) Degrees Celsius</h4>
-                    <h4>High Temp: @(((forecast.Low - 32) * 5) / 9) Degrees Celsius</h4>
-                }
-
-                <ul class="advice-list">
-                    @foreach (string advice in forecast.Advice)
-                    {
-                        <li class="advice">@advice.ToString()</li>
-                    }
-                </ul>
-
-            </div>
-        }
+    <div class="words">
+        <p>@Model.Park.ParkDescription</p>
+        <p>@Model.Park.InspirationalQuote</p>
+        <h5>@Model.Park.InspirationalQuoteSource</h5>
     </div>
-
 
 </section>
+<form class="changer" method="get" asp-controller="Home" asp-action="Details">
+    <input type="submit" value="ChangeTemperatureType" />
+    <select asp-for="@pref">
+        <option value="C">Celsius</option>
+        <option value="F">Fahrenheit</option>
+    </select>
+</form>
+
+<div class="forecast">
+    @foreach (Forecast forecast in Model.Forecasts)
+    {
+        <div class="forecast-info">
+
+            <h1>Day @forecast.Day</h1>
+            @if (forecast.Weather != null)
+            {
+                <img class="weather-img" src="~/images/img/weather/@(forecast.Weather).png" />
+            }
+
+            @if (pref != "C")
+            {
+                <h4>High Temp: @forecast.High Degrees Fahrenheit</h4>
+                <h4>High Temp: @forecast.Low Degrees Fahrenheit</h4>
+            }
+
+            @if (pref == "C")
+            {
+                <h4>High Temp: @(((forecast.High - 32) * 5) / 9) Degrees Celsius</h4>
+                <h4>High Temp: @(((forecast.Low - 32) * 5) / 9) Degrees Celsius</h4>
+            }
+
+            <ul class="advice-list">
+                @foreach (string advice in forecast.Advice)
+                {
+                    <li class="advice">@advice.ToString()</li>
+                }
+            </ul>
+        </div>
+    }
+
+</div>
 

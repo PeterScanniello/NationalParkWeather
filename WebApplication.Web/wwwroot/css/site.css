@@ -52,11 +52,11 @@ main img{
 
 main h2{
     margin-top: 0px;
-    font-size:medium;
+    font-size:large;
 }
 
 main p{
-    font-size: small;
+    font-size: medium;
 }
 
 main{
@@ -65,7 +65,9 @@ main{
 }
   
 
-
+.name-description{
+    align-self:center;
+}
 
 
 

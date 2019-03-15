@@ -1,43 +1,66 @@
-﻿body {
-  
-
+﻿
+.centeredPanel {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    grid-gap:10px;
+    grid-template-areas: 
+        " image details " 
+        " description description ";
 }
-ul.park-detail-info{
+
+ul.park-detail-info {
     list-style: none;
-    grid-area: details;
     margin-left: 0px;
 }
-.detail-image{
-    grid-area: image;
+
+div.park-details {
+    grid-area: details;
+    width:100%;
+    text-align:center;
 }
-.words{
+
+.detail-image {
+    grid-area: image;
+    text-align: center;
+}
+
+.words {
     grid-area: description;
 }
 
-centeredPanel {
-    display: grid;
-    grid-template-columns: 1fr 2fr 2fr 2fr 2fr 1fr;
-    grid-template-areas: ". image image details details ." ". description description description description .";
-}
 
+.group{
+   display:flex;   
+}
 
 div.forecast{
     display: flex;
-    flex-direction: row;
-    
-    
+    flex-direction: row;  
+    justify-content:space-between;
 }
 
-
-.advice-list li.advice {
-    text-decoration:none;
-}
-input{
-    
+div.forecast .forecast-info{
+    border:1px ridge lightblue;
+    border-radius:10px;
+    text-align:center;
+    margin-top:5px;
 }
 
 ul.advice-list {
     list-style: none;
+    padding:0px;
+    margin:0px;
 }
-    
 
+div .park-details h2{
+    width:100%;
+}
+
+.changer {
+    text-align:center;
+}
+
+.weather-img {
+    width:66%;
+    height:auto;
+}

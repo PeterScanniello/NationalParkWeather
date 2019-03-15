@@ -8,7 +8,6 @@ namespace WebApplication.Web.Models
 {
     public class ParkDetailsViewModel
     {
-
         public Park Park {get;set;}
 
         public IList<Forecast> Forecasts { get; set; }
