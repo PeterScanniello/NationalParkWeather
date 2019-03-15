@@ -1,2 +1,60 @@
 ﻿body {
 }
+
+
+.activity {
+    margin-top: 0px;
+    display: flex;
+    align-items: center;
+}
+
+    .activity li {
+        display: inline-block;
+    }
+.survey-field div label{
+   width: 20%;
+}
+
+.survey-field div{
+    vertical-align:auto;
+    display:flex;
+    padding-bottom:10px;
+    margin-top:10px;
+}
+
+input.submit{
+   margin-top:10px;
+   align-self:center;
+   position:relative;
+   left:30%;
+}
+
+
+.park-survey{
+    display:grid;
+    grid-template-columns:1Fr 1Fr 1Fr;
+    grid-template-areas:
+       "image name number";
+}
+
+.survey-park-image{
+    grid-area: image;
+    padding-bottom:10px;
+    width:100%;
+    height:auto;
+}
+
+.park-survey .park-name{
+    grid-area:name;
+    text-align:center;
+}
+
+.park-survey .count{
+    grid-area:number;
+    text-align:left;
+}
+
+.surveys {
+ text-align:left;
+
+}

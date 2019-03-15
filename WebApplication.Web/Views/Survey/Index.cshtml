@@ -4,19 +4,23 @@
 
 }
 
-<h2>Index</h2>
+<h2>Top Parks By Number of Surveys Submitted as Favorite</h2>
+<div class="surveys">
+
 
 @foreach (Park park in Model)
 {
+    <div class="park-survey">
+
     @if (park.Surveys.Count > 0)
     {
-        <img src="~/images/img/parks/@(park.ParkCode).jpg" />
+        <img class="survey-park-image" src="~/images/img/parks/@(park.ParkCode).jpg" />
 
-        <h2> @park.ParkName </h2>
+        <h3 class="park-name"> @park.ParkName </h3>
 
-        <h4>@park.Surveys.Count</h4>
+        <h5 class="count">@park.Surveys.Count Surveys Submitted</h5>
     }
-
-
+    </div>
 }
+</div>
 

@@ -11,7 +11,9 @@
 
     <div class="survey-field">
         <div>
-            <select asp-for="ParkCode"> 
+            <label for="park-dropdown">Favorite National Park :</label>
+            <select class="park-dropdown" asp-for="ParkCode">
+
                 @foreach (Park park in parks)
                 {
                     <option value="@park.ParkCode">@park.ParkName</option>
@@ -20,28 +22,29 @@
         </div>
 
         <div>
-            <label asp-for="EmailAddress"></label>
+            <label asp-for="EmailAddress">Email Address :</label>
             <input asp-for="EmailAddress" type="text" />
             <span asp-validation-for="EmailAddress"></span>
         </div>
 
         <div>
-            <select asp-for="State">
+            <label for="state">State of Residence :</label>
+            <select class="state" asp-for="State">
                 @foreach (string state in states)
                 {
                     <option value="@state">@state</option>
                 }
             </select>
         </div>
-        <div>
-            
-                @foreach (string level in activityLevels)
-                {
-                    <input type="radio" name="@level" value="@level" />@level<br>
-                }
-            
+        <div class="activity">
+            <label for="activity">Activity Level :</label>
+            @foreach (string level in activityLevels)
+            {
+                <input type="radio" name="ActivityLevel" value="@level" />@level<br>
+            }
         </div>
     </div>
-    <input type="submit" value="Submit" />
+    <span></span>
+    <input class="submit" type="submit" value="Submit" />
 </form>
 
