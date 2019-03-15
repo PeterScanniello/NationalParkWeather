@@ -27,15 +27,9 @@ namespace WebApplication.Web.Controllers
             return View(parks);
         }
 
-        public IActionResult Details(string id)
+        public IActionResult Details(string id, string pref)
         {
-            Park park = parkDAO.GetPark(id);
-            return View(park);
-        }
-
-        public IActionResult Forecast(string id,string pref)
-        {
-            if(pref == null)
+            if (pref == null)
             {
                 pref = HttpContext.Session.GetString("TempPref");
                 {
@@ -51,9 +45,13 @@ namespace WebApplication.Web.Controllers
             }
 
             ViewData["TempPref"] = pref;
-            IList<Forecast> forecasts = forecastDAO.GetForecastsByPark(id);
 
-            return View(forecasts);
+            Park park = parkDAO.GetPark(id);
+            ParkDetailsViewModel model = new ParkDetailsViewModel();
+            IList<Forecast> results = forecastDAO.GetForecastsByPark(park.ParkCode);
+            model.Park = park;
+            model.Forecasts = results;
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -1,24 +1,77 @@
-﻿@model Park
+﻿@model ParkDetailsViewModel
 @{
     ViewData["Title"] = "Details";
+    string pref = (string)ViewData["TempPref"];
 }
+
 
 <section class="centeredPanel">
 
     <div class="park-details">
+        {
+        <img src="~/images/img/parks/@(Model.Park.ParkCode).jpg" />
 
-        <img src="~/images/img/parks/@(Model.ParkCode).jpg" />
-
-
-        <h2>@Model.ParkName</h2>
-        <p>Park Code: @Model.ParkCode</p>
-
-        <h3>Park State: @Model.State</h3>
-        <p>@Model.ParkDescription</p>
+        <h2>@Model.Park.ParkName</h2>
+        <p>Park Code: @Model.Park.ParkCode</p>
+        <ul class="park-detail-info">
+            <li>Park State: @Model.Park.State</li>
+            <li>@Model.Park.YearFounded</li>
+            <li>@Model.Park.AnnualVisitorCount</li>
+            <li>@Model.Park.Acreage</li>
+            <li>@Model.Park.Climate</li>
+            <li>@Model.Park.ElevationInFeet</li>
+            <li>@Model.Park.EntryFee</li>
+            <li>@Model.Park.MilesOfTrail</li>
+            <li>@Model.Park.NumberOfAnimalSpecies</li>
+            <li>@Model.Park.NumberOfCampsites</li>
+        </ul>
+        <p>@Model.Park.ParkDescription</p>
+        <p>@Model.Park.InspirationalQuote</p>
+        <h5>@Model.Park.InspirationalQuoteSource</h5>
+        
     </div>
-    <a asp-controller="Home" asp-action="Forecast" asp-route-id="@Model.ParkCode">
-        <input type="submit" value="5-Day Forecast" />
-    </a>
-    
+
+    <form method="get" asp-controller="Home" asp-action="Details">
+        <input type="submit" value="ChangeTemperatureType" />
+        <select asp-for="@pref">
+            <option value="C">Celsius</option>
+            <option value="F">Fahrenheit</option>
+        </select>
+    </form>
+       
+    @foreach (Forecast forecast in Model.Forecasts)
+    {
+        <div class="forecast">
+
+            <h1>Day @forecast.Day</h1>
+            @if (forecast.Weather != "cloudy")
+            {
+                <img src="~/images/img/weather/@(forecast.Weather).png" />
+            }
+
+            @if (pref!="C")
+            {
+                <h4>High Temp: @forecast.High Degrees Fahrenheit</h4>
+                <h4>High Temp: @forecast.Low Degrees Fahrenheit</h4>
+            }
+
+            @if (pref == "C")
+            {
+                <h4>High Temp: @(((forecast.High - 32) * 5) / 9) Degrees Celsius</h4>
+                <h4>High Temp: @(((forecast.Low - 32) * 5) / 9) Degrees Celsius</h4>
+            }
+
+            <ul>
+                @foreach (string advice in forecast.Advice)
+                {
+                    <li>@advice.ToString()</li>
+                }
+            </ul>
+
+        </div>
+    }
+
+
+
 </section>
 
