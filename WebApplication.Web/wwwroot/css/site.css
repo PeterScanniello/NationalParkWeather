@@ -18,8 +18,7 @@ nav {
         font-size: 25px;
         display: inline-block;
         text-decoration: none;
-        list-style-type: none;
-        
+        list-style-type: none;        
     }
 
 ul.Nav-List {
@@ -37,29 +36,32 @@ nav button.nav-button {
 
 main .park{
     display:grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap:25px;
+    grid-template-columns: 4fr 5fr;
+    grid-gap:15px;
     grid-template-areas:
-    "parkimage description";
-        
+    "parkimage description";        
     padding-top: 15px;
 }
 
 
 main img{
     grid-area: parkimage;
-    height: 100%;
+    height: auto;
     width: 100%;
-    margin-left: 20px;
-    
 }
 
 main h2{
     margin-top: 0px;
+    font-size:medium;
 }
 
 main p{
-    font-size: 25px;
+    font-size: small;
+}
+
+main{
+    margin-right:10%;
+    margin-left:10%;
 }
   
 
