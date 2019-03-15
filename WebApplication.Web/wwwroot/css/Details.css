@@ -1,12 +1,25 @@
 ﻿body {
-    
+  
 
 }
 ul.park-detail-info{
     list-style: none;
-    display:flex;
+    grid-area: details;
     margin-left: 0px;
 }
+.detail-image{
+    grid-area: image;
+}
+.words{
+    grid-area: description;
+}
+
+centeredPanel {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 2fr 2fr 1fr;
+    grid-template-areas: ". image image details details ." ". description description description description .";
+}
+
 
 div.forecast{
     display: flex;
@@ -15,9 +28,16 @@ div.forecast{
     
 }
 
-img.weather-img{
-    width: 300px;
-}
+
 .advice-list li.advice {
     text-decoration:none;
 }
+input{
+    
+}
+
+ul.advice-list {
+    list-style: none;
+}
+    
+

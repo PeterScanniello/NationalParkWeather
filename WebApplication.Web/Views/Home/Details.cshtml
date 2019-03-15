@@ -6,10 +6,11 @@
 
 
 <section class="centeredPanel">
+    <div class="detail-image">
+        <img class="detail-image" src="~/images/img/parks/@(Model.Park.ParkCode).jpg" />
+    </div>
 
     <div class="park-details">
-        
-        <img class="detail-image"src="~/images/img/parks/@(Model.Park.ParkCode).jpg" />
 
         <h2>@Model.Park.ParkName</h2>
         <p>Park Code: @Model.Park.ParkCode</p>
@@ -25,10 +26,11 @@
             <li>Animal Species@Model.Park.NumberOfAnimalSpecies</li>
             <li>Number of campsites: @Model.Park.NumberOfCampsites</li>
         </ul>
-        <p>@Model.Park.ParkDescription</p>
-        <p>@Model.Park.InspirationalQuote</p>
-        <h5>@Model.Park.InspirationalQuoteSource</h5>
-        
+        <div class="words">
+            <p>@Model.Park.ParkDescription</p>
+            <p>@Model.Park.InspirationalQuote</p>
+            <h5>@Model.Park.InspirationalQuoteSource</h5>
+        </div>
     </div>
 
     <form method="get" asp-controller="Home" asp-action="Details">
@@ -38,7 +40,7 @@
             <option value="F">Fahrenheit</option>
         </select>
     </form>
-       
+
     <div class="forecast">
         @foreach (Forecast forecast in Model.Forecasts)
         {
