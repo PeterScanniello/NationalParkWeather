@@ -1,2 +1,23 @@
 ﻿body {
+    
+
+}
+ul.park-detail-info{
+    list-style: none;
+    display:flex;
+    margin-left: 0px;
+}
+
+div.forecast{
+    display: flex;
+    flex-direction: row;
+    
+    
+}
+
+img.weather-img{
+    width: 300px;
+}
+.advice-list li.advice {
+    text-decoration:none;
 }

@@ -8,22 +8,22 @@
 <section class="centeredPanel">
 
     <div class="park-details">
-        {
-        <img src="~/images/img/parks/@(Model.Park.ParkCode).jpg" />
+        
+        <img class="detail-image"src="~/images/img/parks/@(Model.Park.ParkCode).jpg" />
 
         <h2>@Model.Park.ParkName</h2>
         <p>Park Code: @Model.Park.ParkCode</p>
         <ul class="park-detail-info">
-            <li>Park State: @Model.Park.State</li>
-            <li>@Model.Park.YearFounded</li>
-            <li>@Model.Park.AnnualVisitorCount</li>
-            <li>@Model.Park.Acreage</li>
-            <li>@Model.Park.Climate</li>
-            <li>@Model.Park.ElevationInFeet</li>
-            <li>@Model.Park.EntryFee</li>
-            <li>@Model.Park.MilesOfTrail</li>
-            <li>@Model.Park.NumberOfAnimalSpecies</li>
-            <li>@Model.Park.NumberOfCampsites</li>
+            <li>State: @Model.Park.State</li>
+            <li>Year Founded: @Model.Park.YearFounded</li>
+            <li>Annual Visitors: @Model.Park.AnnualVisitorCount</li>
+            <li>Acres: @Model.Park.Acreage</li>
+            <li>Climate: @Model.Park.Climate</li>
+            <li>Elevation(ft): @Model.Park.ElevationInFeet</li>
+            <li>Entry Fee: @Model.Park.EntryFee</li>
+            <li>Trail Miles: @Model.Park.MilesOfTrail</li>
+            <li>Animal Species@Model.Park.NumberOfAnimalSpecies</li>
+            <li>Number of campsites: @Model.Park.NumberOfCampsites</li>
         </ul>
         <p>@Model.Park.ParkDescription</p>
         <p>@Model.Park.InspirationalQuote</p>
@@ -39,38 +39,39 @@
         </select>
     </form>
        
-    @foreach (Forecast forecast in Model.Forecasts)
-    {
-        <div class="forecast">
+    <div class="forecast">
+        @foreach (Forecast forecast in Model.Forecasts)
+        {
+            <div class="forecast-info">
 
-            <h1>Day @forecast.Day</h1>
-            @if (forecast.Weather != "cloudy")
-            {
-                <img src="~/images/img/weather/@(forecast.Weather).png" />
-            }
-
-            @if (pref!="C")
-            {
-                <h4>High Temp: @forecast.High Degrees Fahrenheit</h4>
-                <h4>High Temp: @forecast.Low Degrees Fahrenheit</h4>
-            }
-
-            @if (pref == "C")
-            {
-                <h4>High Temp: @(((forecast.High - 32) * 5) / 9) Degrees Celsius</h4>
-                <h4>High Temp: @(((forecast.Low - 32) * 5) / 9) Degrees Celsius</h4>
-            }
-
-            <ul>
-                @foreach (string advice in forecast.Advice)
+                <h1>Day @forecast.Day</h1>
+                @if (forecast.Weather != "cloudy")
                 {
-                    <li>@advice.ToString()</li>
+                    <img class="weather-img" src="~/images/img/weather/@(forecast.Weather).png" />
                 }
-            </ul>
 
-        </div>
-    }
+                @if (pref != "C")
+                {
+                    <h4>High Temp: @forecast.High Degrees Fahrenheit</h4>
+                    <h4>High Temp: @forecast.Low Degrees Fahrenheit</h4>
+                }
 
+                @if (pref == "C")
+                {
+                    <h4>High Temp: @(((forecast.High - 32) * 5) / 9) Degrees Celsius</h4>
+                    <h4>High Temp: @(((forecast.Low - 32) * 5) / 9) Degrees Celsius</h4>
+                }
+
+                <ul class="advice-list">
+                    @foreach (string advice in forecast.Advice)
+                    {
+                        <li class="advice">@advice.ToString()</li>
+                    }
+                </ul>
+
+            </div>
+        }
+    </div>
 
 
 </section>
