@@ -57,16 +57,16 @@ namespace WebApplication.Web.DAL
         /// <returns></returns>
         public IList<Forecast> GetForecastsByPark(string id)
         {
-            IList<Forecast> theOnesWeWant = new List<Forecast>();
-            IList<Forecast> forecasts = GetAllForecasts();
-            foreach(Forecast forecast in forecasts)
+            IList<Forecast> forecastsByParkCode = new List<Forecast>();
+            IList<Forecast> allForecasts = GetAllForecasts();
+            foreach(Forecast forecast in allForecasts)
             {
                 if(forecast.ParkCode==id)
                 {
-                    theOnesWeWant.Add(forecast);
+                    forecastsByParkCode.Add(forecast);
                 }
             }
-            return theOnesWeWant;
+            return forecastsByParkCode;
         }
 
         /// <summary>
