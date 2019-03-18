@@ -42,16 +42,16 @@ namespace WebApplication.Web.DAL
 
         public IList<Forecast> GetForecastsByPark(string id)
         {
-            IList<Forecast> theOnesWeWant = new List<Forecast>();
-            IList<Forecast> forecasts = GetAllForecasts();
-            foreach(Forecast forecast in forecasts)
+            IList<Forecast> forecastsByParkCode = new List<Forecast>();
+            IList<Forecast> allForecasts = GetAllForecasts();
+            foreach(Forecast forecast in allForecasts)
             {
                 if(forecast.ParkCode==id)
                 {
-                    theOnesWeWant.Add(forecast);
+                    forecastsByParkCode.Add(forecast);
                 }
             }
-            return theOnesWeWant;
+            return forecastsByParkCode;
         }
 
         public Dictionary<string, string> Advice = new Dictionary<string, string>()
