@@ -14,21 +14,34 @@ namespace WebApplication.Web.Models
             this.connectionString = connectionString;
         }
 
+        /// <summary>
+        /// Retrieves all the surveys of the parks grouped by park code
+        /// </summary>
+        /// <param name="parkCode"></param>
+        /// <returns></returns>
         public IList<Survey> GetSurveys(string parkCode)
         {
             IList<Survey> surveys = new List<Survey>();
 
             try
             {
+                // Create a new connection string
                 using(SqlConnection conn = new SqlConnection(connectionString))
                 {
+                    // Open the connection
                     conn.Open();
+
+                    
                     SqlCommand cmd = new SqlCommand("SELECT * FROM survey_result where @parkcode=parkCode order by parkCode", conn);
                     cmd.Parameters.AddWithValue("@parkCode", parkCode);
+
+                    // Execute the command
                     SqlDataReader reader = cmd.ExecuteReader();
 
+                    // Loop through each row
                     while (reader.Read())
                     {
+                        // Convert the row to a survey
                         Survey survey = ConvertReaderToSurvey(reader);
                         surveys.Add(survey);
                     }
@@ -42,7 +55,6 @@ namespace WebApplication.Web.Models
             return surveys;
         }
         
-
         private Survey ConvertReaderToSurvey(SqlDataReader reader)
         {
             Survey survey = new Survey();
@@ -53,7 +65,11 @@ namespace WebApplication.Web.Models
 
             return survey;
         }
-
+        
+        /// <summary>
+        /// Adds a survey to the database
+        /// </summary>
+        /// <param name="survey"></param>
         public void SaveNewSurvey(Survey survey)
         {
             try

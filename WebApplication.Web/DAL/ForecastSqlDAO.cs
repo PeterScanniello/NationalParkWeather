@@ -15,17 +15,27 @@ namespace WebApplication.Web.DAL
             this.connectionString = connectionString;
         }
 
+        /// <summary>
+        /// Returns all of the forecasts
+        /// </summary>
+        /// <returns></returns>
         public IList<Forecast> GetAllForecasts()
         {
             IList<Forecast> forecasts = new List<Forecast>();
             try
             {
+                // Create a new connection object
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
+                    // Open the connection
                     conn.Open();
+
                     SqlCommand cmd = new SqlCommand("SELECT * FROM weather", conn);
+
+                    // Execute the command
                     SqlDataReader reader = cmd.ExecuteReader();
 
+                    // Loop through each row and create a forecast
                     while (reader.Read())
                     {
                         Forecast forecast = ConvertReaderToForecast(reader);
@@ -40,6 +50,11 @@ namespace WebApplication.Web.DAL
             return forecasts;
         }
 
+        /// <summary>
+        /// Retrieve forecasts by Park Code
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IList<Forecast> GetForecastsByPark(string id)
         {
             IList<Forecast> theOnesWeWant = new List<Forecast>();
@@ -54,6 +69,9 @@ namespace WebApplication.Web.DAL
             return theOnesWeWant;
         }
 
+        /// <summary>
+        /// Dictionary containing weather conditions with advice as values 
+        /// </summary>
         public Dictionary<string, string> Advice = new Dictionary<string, string>()
             {
                 { "snow", "Pack snowshoes" },
@@ -63,6 +81,11 @@ namespace WebApplication.Web.DAL
             };
 
 
+        /// <summary>
+        /// Determine weather advice based on conditions
+        /// </summary>
+        /// <param name="newForecast"></param>
+        /// <returns></returns>
         public List<string> GetAdvice(Forecast newForecast)
         {
             List<string> advice = new List<string>();
@@ -92,6 +115,7 @@ namespace WebApplication.Web.DAL
 
         private Forecast ConvertReaderToForecast(SqlDataReader reader)
         {
+            // Create a Forecast
             Forecast forecast = new Forecast();
 
             forecast.ParkCode = Convert.ToString(reader["parkCode"]);

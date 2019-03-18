@@ -13,6 +13,7 @@ namespace WebApplication.Web.Controllers
 {
     public class HomeController : Controller
     {
+        // Pass DAO in with the Constructor
         private IParkDAO parkDAO;
         private IForecastDAO forecastDAO;
         public HomeController(IParkDAO parkDAO, IForecastDAO forecastDAO)
@@ -21,12 +22,22 @@ namespace WebApplication.Web.Controllers
             this.forecastDAO = forecastDAO;
         }
 
+        /// <summary>
+        /// Returns all of the parks
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             IList<Park> parks = parkDAO.GetParks();
             return View(parks);
         }
 
+        /// <summary>
+        /// Defaults temperature to fahrenheit. Stores user's temperature preference between fahrenheit and celcius in session
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pref"></param>
+        /// <returns></returns>
         public IActionResult Details(string id, string pref)
         {
             if (pref == null)

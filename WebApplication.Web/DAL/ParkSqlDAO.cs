@@ -14,6 +14,12 @@ namespace WebApplication.Web.DAL
         {
             this.connectionString = connectionString;
         }
+
+        /// <summary>
+        /// Retrieve a park through matching a park id and its corresponding park code
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Park GetPark(string id)
         {
             Park newPark = new Park();
@@ -27,19 +33,27 @@ namespace WebApplication.Web.DAL
             }
             return newPark;   
         }
-            
 
+        /// <summary>
+        /// Returns all of the parks
+        /// </summary>
+        /// <returns></returns>
         public IList<Park> GetParks()
         {
             IList<Park> parks = new List<Park>();
             try
             {
+                // Create a new connection object
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
+                    // Open the connection
                     conn.Open();
                     SqlCommand cmd = new SqlCommand("SELECT * FROM park", conn);
+
+                    // Execute the commad
                     SqlDataReader reader = cmd.ExecuteReader();
 
+                    // Loop through each row and create a park
                     while (reader.Read())
                     {
                         Park park = ConvertReaderToPark(reader);
@@ -57,9 +71,9 @@ namespace WebApplication.Web.DAL
 
         private Park ConvertReaderToPark(SqlDataReader reader)
         {
+            // Create a Park
             Park park = new Park();
-
-           // park.ParkId = Convert.ToInt32(reader["Id"]);
+           
             park.ParkCode = Convert.ToString(reader["ParkCode"]);
             park.ParkName = Convert.ToString(reader["ParkName"]);
             park.State = Convert.ToString(reader["State"]);

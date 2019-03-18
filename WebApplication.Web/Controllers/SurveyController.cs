@@ -19,6 +19,10 @@ namespace WebApplication.Web.Controllers
             this.surveyDao = surveyDao;
         }
 
+        /// <summary>
+        /// Returns all surveys grouped by park code and orders the parks from most surveys submitted to least
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Index()
         {
@@ -36,7 +40,10 @@ namespace WebApplication.Web.Controllers
         }
 
 
-
+        /// <summary>
+        /// Takes user to page to submit a new survey
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult NewSurvey()
         {
@@ -109,6 +116,11 @@ namespace WebApplication.Web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Submits user's survey if criteria was met with inputs
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult NewSurvey(Survey model)
@@ -116,6 +128,8 @@ namespace WebApplication.Web.Controllers
             if (ModelState.IsValid)
             {
                 surveyDao.SaveNewSurvey(model);
+
+                // Redirect browser to Index
                 return RedirectToAction("Index");
             }
             return View("NewSurvey");
